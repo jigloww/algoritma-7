@@ -16,7 +16,7 @@ class DataDosen09 {
             System.out.println("Belum ada data dosen.");
             return;
         }
-        System.out.println("\nData Dosen:");
+        System.out.println("Data Dosen:");
         System.out.println("--------------------------");
         for (int i = 0; i < idx; i++) {
             dataDosen[i].tampil();
@@ -34,7 +34,7 @@ class DataDosen09 {
                 }
             }
         }
-        System.out.println("Data berhasil diurutkan secara ASCENDING (Termuda ke Tertua).");
+        System.out.println("Data berhasil diurutkan ASCENDING (Termuda ke Tertua).");
     }
 
     public void sortingDSC() {
@@ -47,15 +47,15 @@ class DataDosen09 {
             }
             dataDosen[j + 1] = temp;
         }
-        System.out.println("Data berhasil diurutkan secara DESCENDING (Tertua ke Termuda).");
+        System.out.println("Data berhasil diurutkan DESCENDING (Tertua ke Termuda).");
     }
 
-    // Pencarian Data Sequential berdasarkan Nama
+    //Pencarian Data Sequential berdasarkan Nama (Dengan Peringatan Jika Duplikat)
     public void pencarianDataSequential(String namaCari) {
         boolean ditemukan = false;
         int count = 0;
         
-        System.out.println("\nHasil Pencarian Nama: " + namaCari);
+        System.out.println("\n🔍 Hasil Pencarian Nama: " + namaCari);
         System.out.println("--------------------------");
 
         for (int i = 0; i < idx; i++) {
@@ -70,21 +70,22 @@ class DataDosen09 {
         if (!ditemukan) {
             System.out.println("Data dosen dengan nama '" + namaCari + "' tidak ditemukan.");
         } else if (count > 1) {
-            System.out.println("⚠️ Peringatan: Ada lebih dari satu dosen dengan nama yang sama.");
+            System.out.println("Peringatan: Ada " + count + " dosen dengan nama yang sama.");
         }
     }
 
-    // Pencarian Data Binary berdasarkan Usia (Tampilkan Semua yang Sama)
+    // Pencarian Data Binary berdasarkan Usia (Tampilkan Semua yang Sama, dengan Peringatan)
     public void pencarianDataBinary(int usiaCari) {
         sortingASC(); 
         
         int kiri = 0, kanan = idx - 1;
         boolean ditemukan = false;
+        int count = 0;
 
-        System.out.println("\nHasil Pencarian Usia: " + usiaCari);
+        System.out.println("Hasil Pencarian Usia: " + usiaCari);
         System.out.println("--------------------------");
 
-        // Melakukan binary search
+        
         while (kiri <= kanan) {
             int mid = (kiri + kanan) / 2;
             
@@ -95,6 +96,7 @@ class DataDosen09 {
                     dataDosen[i].tampil();
                     System.out.println("--------------------------");
                     i--;
+                    count++;
                 }
                 
                 i = mid + 1;
@@ -102,6 +104,7 @@ class DataDosen09 {
                     dataDosen[i].tampil();
                     System.out.println("--------------------------");
                     i++;
+                    count++;
                 }
                 
                 ditemukan = true;
@@ -115,6 +118,8 @@ class DataDosen09 {
 
         if (!ditemukan) {
             System.out.println("Data dosen dengan usia '" + usiaCari + "' tidak ditemukan.");
+        } else if (count > 1) {
+            System.out.println("Peringatan: Ada " + count + " dosen dengan usia yang sama.");
         }
     }
 }
